@@ -1,5 +1,16 @@
 import uuid from 'uuid';
 
+//Component calls action generator
+//Action generator returns object
+//Component dispatches object
+//Redux store changes
+
+//new  way to work with Firebase
+//Component calls action generator
+//Action generator returns function
+//Component dispatches function(?)
+//Function runs (has the ability to dispatch other actions and do whatever it wants)
+
 //ADD_EXPENSE - action generator function
 export const addExpense = (
     {
