@@ -10,7 +10,8 @@ import configureStore from './store/configureStore';
 import 'normalize.css/normalize.css';
 import './style/style.scss';
 import 'react-dates/lib/css/_datepicker.css';
-import './firebase/firebase2';
+import './firebase/firebase';
+//import promise from './playground/promise2';
 
 const store = configureStore();
 

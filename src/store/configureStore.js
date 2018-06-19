@@ -12,7 +12,7 @@ export default () => {
             expenses: expensesReducer,
             filters: filterReducer 
         }),
-        composeEnhancers(applyMiddleware(thunk));
+        composeEnhancers(applyMiddleware(thunk))
         //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
     return store; 
