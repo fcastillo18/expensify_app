@@ -75,7 +75,7 @@ export { firebase, database as default };
 //     body: 'buy food'
 // })
 
-//this will generate an unique ID for all added objects
+// this will generate an unique ID for all added objects
 // database.ref('notes').push({
 //     title: 'Course topics',
 //     body: 'React, Angular, Vue'
@@ -109,7 +109,7 @@ export { firebase, database as default };
 //     }
 // ]
 
-//database.ref('notes').set(notes);
+// database.ref('notes').set(notes);
 
 // database.ref().on('value',  (snapshot) => {
 //     const val = snapshot.val();
