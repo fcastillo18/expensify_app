@@ -1,6 +1,6 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses } from '../../actions/expenses';
+import { startAddExpense, addExpense, editExpense, removeExpense, setExpenses, startSetExpenses } from '../../actions/expenses';
 import expenses from '../fixtures/expenses';
 import database from '../../firebase/firebase';
 
@@ -34,12 +34,6 @@ test('should setup edit expense action object', () => {
 });
 
 test('should setup add expense action object with provided values', () => {
-  // const expenseData = {
-  //   description: 'Rent',
-  //   amount: 109500,
-  //   createdAt: 1000,
-  //   note: 'This was last months rent'
-  // };
   const action = addExpense(expenses[2]);
   expect(action).toEqual({
     type: 'ADD_EXPENSE',
@@ -47,8 +41,13 @@ test('should setup add expense action object with provided values', () => {
   });
 });
 
-//done is used for jest with asyncronous operations or tests.
 test('should add expense to database and store', (done) => {
+  // const expenseData = {
+  //   description: 'Rent',
+  //   amount: 109500,
+  //   createdAt: 1000,
+  //   note: 'This was last months rent'
+  // };
   const store = createMockStore({});
   const expenseData = {
     description: 'Mouse',
@@ -67,61 +66,56 @@ test('should add expense to database and store', (done) => {
       }
     });
 
-    //Promise chaining
-    return database.ref(`expenses/${actions[0].expense.id}`).once('value')
-    }).then((snapshot)=>{
-      expect(snapshot.val()).toEqual(expenseData);
-      done();;
+    return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+  }).then((snapshot) => {
+    expect(snapshot.val()).toEqual(expenseData);
+    done();
   });
 });
 
-test('should setup set expense action object with data', () => {
-  const action = setExpenses(expenses);
-  expect(action).toEqual({
-    type: 'SET_EXPENSES', 
-    expenses
-  });
-});
-
-//-----------------
-test('should add expense with default to database and store', () => {
+//done is used for jest with asyncronous operations or tests.
+test('should add expense with defaults to database and store', (done) => {
   const store = createMockStore({});
-  const expenseData = {
+  const expenseDefaults = {
     description: '',
     amount: 0,
     note: '',
     createdAt: 0
   };
 
-  store.dispatch(startAddExpense(expenseData)).then(() => {
+  store.dispatch(startAddExpense({})).then(() => {
     const actions = store.getActions();
     expect(actions[0]).toEqual({
       type: 'ADD_EXPENSE',
       expense: {
         id: expect.any(String),
-        ...expenseData
+        ...expenseDefaults
       }
     });
-
     //Promise chaining
-    return database.ref(`expenses/${actions[0].expense.id}`).once('value')
-    }).then((snapshot)=>{
-      expect(snapshot.val()).toEqual(expenseData);
-      done();;
+    return database.ref(`expenses/${actions[0].expense.id}`).once('value');
+  }).then((snapshot) => {
+    expect(snapshot.val()).toEqual(expenseDefaults);
+    done();
   });
 });
 
+test('should setup set expense action object with data', () => {
+  const action = setExpenses(expenses);
+  expect(action).toEqual({
+    type: 'SET_EXPENSES',
+    expenses
+  });
+});
 
-// test('should setup add expense action object with default values', () => {
-//   const action = addExpense();
-//   expect(action).toEqual({
-//     type: 'ADD_EXPENSE',
-//     expense: {
-//       id: expect.any(String),
-//       description: '',
-//       note: '',
-//       amount: 0,
-//       createdAt: 0
-//     }
-//   });
-// });
+test('should fetch the expenses from firebase', (done) => {
+  const store = createMockStore({});
+  store.dispatch(startSetExpenses()).then(() => {
+    const actions = store.getActions();
+    expect(actions[0]).toEqual({
+      type: 'SET_EXPENSES',
+      expenses
+    });
+    done();
+  });
+});

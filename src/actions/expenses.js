@@ -80,4 +80,20 @@ export const editExpense = (id, updates) => ({
      expenses
  });
 
- //export const startSetExpenses = () => ({})
+ export const startSetExpenses = () => {
+
+    return ((dispatch) => {
+      return database.ref('expenses').once('value').then((snapshot) => {
+        const expenses = [];
+        snapshot.forEach((childSnapShot) => {
+            //parsing the firebase data to an array
+            expenses.push({
+                id:childSnapShot.key,
+                ...childSnapShot.val()
+            });
+        });
+
+        dispatch(setExpenses(expenses));
+      })
+    })
+ };
