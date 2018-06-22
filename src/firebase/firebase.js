@@ -1,5 +1,6 @@
 import * as firebase from 'firebase';
 
+
 // Initialize Firebase
   const config = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -10,8 +11,9 @@ import * as firebase from 'firebase';
     messagingSenderId: process.env.FIREBASE_MESSAGIN_SENDER_ID,
   };
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
-  const database = firebase.database();
+const database = firebase.database();
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-  export { firebase, database as default };
+export { firebase, googleAuthProvider, database as default };
