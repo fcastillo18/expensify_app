@@ -8,6 +8,8 @@ import HelpExpensePage from '../components/HelpExpensePage';
 import NotFoundPage from '../components/NotFoundPage';
 import LoginPage from '../components/LoginPage';
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
+
 
 /**
  * By default when we use BrowserRouter, React do some work behind the scenes. 
@@ -25,12 +27,12 @@ const AppRouter = () =>(
     <Router history={history}>
         <div>
             <Switch> 
-                <Route path="/" component={LoginPage} exact={true}/>
+                <PublicRoute path="/" component={LoginPage} exact={true}/>
                 <PrivateRoute path="/dashboard" component={ExpenseDashBoardPage} exact={true}/>
                 <PrivateRoute path="/create" component={AddExpensePage} />
                 <PrivateRoute path="/edit/:id" component={EditExpensePage} />
                 <PrivateRoute path="/help" component={HelpExpensePage} />
-                <Route component={NotFoundPage}/>
+                <PublicRoute component={NotFoundPage}/>
             </Switch>
         </div>
     </Router>
