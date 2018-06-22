@@ -8,7 +8,7 @@ import { startSetExpenses } from './actions/expenses';
 import { login, logout } from './actions/auth'
 // import getVisibleExpenses from './selectors/expenses';
 import 'normalize.css/normalize.css';
-import './style/style.scss';
+import './styles/styles.scss';
 import 'react-dates/lib/css/_datepicker.css';
 import { firebase } from './firebase/firebase';
 //import promise from './playground/promise2';
@@ -56,11 +56,11 @@ firebase.auth().onAuthStateChanged((user) => {
                 history.push('/dashboard');
             }
         });
-        console.log('Log in');
+        //console.log('Log in');
     } else {
         store.dispatch(logout());
         renderApp();
         history.push('/');
-        console.log('Log out');
+        //console.log('Log out');
     }
 });
