@@ -15,7 +15,8 @@ module.exports = (env) => {
   const CSSExtract = new ExtractTextPlugin('styles.css');
 
   return {
-    entry: './src/app.js',
+    //this babel-polyfill is neccesary to make the app available on others browsers like IE9
+    entry: ['babel-polyfill','./src/app.js'],
     output: {
       path: path.join(__dirname, 'public', 'dist'),
       filename: 'bundle.js'
