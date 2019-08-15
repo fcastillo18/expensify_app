@@ -63,6 +63,6 @@
     "jest": "^23.1.0",
     "live-server": "^1.2.0",
     "react-test-renderer": "^16.4.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^3.1.11"
   }
 }
