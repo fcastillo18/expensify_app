@@ -34,7 +34,7 @@
     "history": "^4.7.2",
     "http-proxy": "^1.17.0",
     "isobject": "^3.0.1",
-    "moment": "^2.21.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.7.2",
     "normalize.css": "^7.0.0",
     "numeral": "^2.0.6",
